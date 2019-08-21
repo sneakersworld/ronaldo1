@@ -16,7 +16,12 @@ import FeedbackPage from './FeedbackPage';
 import HelpPage from './HelpPage';
 
 const ProfileNavigation = createStackNavigator({
-  ProfilePage: ProfilePage,
+  ProfilePage: {
+    screen: ProfilePage,
+    navigationOptions: {
+      header: null
+    }
+  },
   EditProfilePage: EditProfilePage,
   SettingsPage: SettingsPage,
   FeedbackPage: FeedbackPage,

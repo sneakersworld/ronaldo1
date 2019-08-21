@@ -13,7 +13,7 @@ import { Icon } from 'react-native-elements'
 
 import ExploreNavigation from './ExploreNavigation';
 import SearchNavigation from './SearchNavigation';
-import FavoritesPage from './FavoritesPage';
+import FavoritesNavigation from './FavoritesNavigation';
 import ProfileNavigation from './ProfileNavigation';
 import SamplePage from '../SamplePage';
 import Colors from '../Colors';
@@ -33,7 +33,7 @@ const TabNavigation = createBottomTabNavigator(
       }
     },
     FAVORITES: {
-      screen: FavoritesPage,
+      screen: FavoritesNavigation,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => <Icon name='favorite' color={tintColor} />
       }

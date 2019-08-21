@@ -26,7 +26,27 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
-  }
+  },
+  searchBarContainer: {
+    borderWidth: 1,
+    borderColor: '#e1e1e1',
+    borderRadius: 3,
+    backgroundColor: '#fff',
+  },
+  searchBarInput: {
+    backgroundColor: '#fff',
+    fontSize: 16,
+    height: 20
+  },
+  searchBarIcon: {
+    position: 'absolute',
+    top: 11,
+    left: 12
+  },
+  searchBarClearIcon: {
+    position: 'absolute',
+    top: 11,
+  },
 });
 
 export default SearchPage;

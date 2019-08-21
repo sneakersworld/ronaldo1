@@ -12,7 +12,12 @@ import { createStackNavigator } from 'react-navigation';
 import SearchPage from './SearchPage';
 
 const SearchNavigation = createStackNavigator({
-  SearchPage: SearchPage
+  SearchPage: {
+    screen: SearchPage,
+    navigationOptions: {
+      header: null
+    }
+  },
 })
 
 export default SearchNavigation;
