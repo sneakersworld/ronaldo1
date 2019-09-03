@@ -8,6 +8,7 @@
 'use strict';
 
 import React, { Component } from 'react';
+import Colors from '../Colors'
 import {
   Image,
   StyleSheet,
@@ -30,8 +31,8 @@ class ShoeItem extends Component {
           accessibilityRole={'button'}
         >
           <Image style={styles.thumbnail} source={{uri: this.props.uri}} />
-          <Text>{this.props.brand}</Text>
-          <Text>{this.props.description}</Text>
+          <Text style={styles.text}>{this.props.brand}</Text>
+          <Text style={styles.text}>{this.props.description}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -40,20 +41,22 @@ class ShoeItem extends Component {
 
 const styles = StyleSheet.create({
   shoeItem: {
-    padding: 20,
-    borderColor: '#e1e1e1',
+    backgroundColor: Colors.white,
+    padding: 15,
+    borderColor: '#f0f0f0',
     borderWidth: 1,
-    borderRadius: 3
+    borderRadius: 3,
+    flex:0.5
   },
   sizes: {
     flexDirection: 'row'
   },
-  sizeText: {
-    marginRight: 5
+  text: {
+    textAlign: 'center'
   },
   thumbnail: {
     width: '100%',
-    height: 100
+    height: 100,
   }
 });
 
