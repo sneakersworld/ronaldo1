@@ -15,46 +15,58 @@ import ExploreNavigation from './ExploreNavigation';
 import SearchNavigation from './SearchNavigation';
 import FavoritesNavigation from './FavoritesNavigation';
 import ProfileNavigation from './ProfileNavigation';
-import SamplePage from '../SamplePage';
 import Colors from '../Colors';
 
 const TabNavigation = createBottomTabNavigator(
   {
-    EXPLORE: {
+    Home: {
       screen: ExploreNavigation,
       navigationOptions: {
-        tabBarIcon: ({ tintColor }) => <Icon name='explore' color={tintColor} />
+        tabBarLabel: 'HOME',
+        tabBarIcon: ({ tintColor }) => <Icon name='home' color={tintColor} />
       }
     },
-    SEARCH: {
+    Search: {
       screen: SearchNavigation,
       navigationOptions: {
+        tabBarLabel: 'SEARCH',
         tabBarIcon: ({ tintColor }) => <Icon name='search' color={tintColor} />
       }
     },
-    FAVORITES: {
-      screen: FavoritesNavigation,
+    Sell: {
+      screen: SearchNavigation,
       navigationOptions: {
-        tabBarIcon: ({ tintColor }) => <Icon name='favorite' color={tintColor} />
+        tabBarLabel: 'SELL',
+        tabBarIcon: ({ tintColor }) => <Icon name='camera-alt' color={tintColor} />
       }
     },
-    PROFILE: {
+    Liked: {
+      screen: FavoritesNavigation,
+      navigationOptions: {
+        tabBarLabel: 'LIKED',
+        tabBarIcon: ({ tintColor }) => <Icon name='favorite-border' color={tintColor} />
+      }
+    },
+    Profile: {
       screen: ProfileNavigation,
       navigationOptions: {
+        tabBarLabel: 'PROFILE',
         tabBarIcon: ({ tintColor }) => <Icon name='person' color={tintColor} />
       }
     },
-    SAMPLE: {
-      screen: SamplePage,
-      navigationOptions: {
-        tabBarIcon: ({ tintColor }) => <Icon name='public' color={tintColor} />
-      }
-    }
   },
   {
     tabBarOptions: {
       activeTintColor: Colors.dark,
-      inactiveTintColor: Colors.light
+      inactiveTintColor: Colors.light,
+      style: {
+        backgroundColor: 'white',
+        borderTopWidth: 0,
+        shadowOffset: { width: 5, height: 3 },
+        shadowColor: 'black',
+        shadowOpacity: 0.5,
+        elevation: 5 // android
+      }
     }
   }
 );

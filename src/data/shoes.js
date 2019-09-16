@@ -3,10 +3,10 @@
 const data = [
   {
     id: 1,
-    description: 'Jordan 1 Retro High Travis Scott',
+    description: 'Eric Koston x Air Jordan 1 SB',
     img: 'https://storage.googleapis.com/pk-sneaker-images/CD4487-100/img02.jpg',
     brand: 'Air Jordan',
-    sku: 'CD4487-100'
+    sku: 'CD4487-10'
   },
   {
     id: 2,
@@ -56,6 +56,13 @@ const data = [
     img: 'https://storage.googleapis.com/pk-sneaker-images/CP9366/0.jpg',
     brand: 'Adidas',
     sku: 'CP9366'
+  },
+  {
+    id: 9,
+    description: 'Jordan 1 Retro High Travis Scott',
+    img: 'https://storage.googleapis.com/pk-sneaker-images/CD4487-100/img02.jpg',
+    brand: 'Air Jordan',
+    sku: 'CD4487-100'
   },
 ];
 

@@ -18,9 +18,13 @@ import {
 import { withNavigation } from 'react-navigation';
 
 class ShoeItem extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <View style={ styles.shoeItem }>
+      <View style={styles.shoeItemContainer}>
         <TouchableOpacity
           onPress={() => {
             this.props.navigation.navigate('ShoeItemPage', {
@@ -28,10 +32,17 @@ class ShoeItem extends Component {
             })
           }}
           accessibilityRole={'button'}
+          style={{flex: 1}}
         >
-          <Image style={styles.thumbnail} source={{uri: this.props.uri}} />
-          <Text>{this.props.brand}</Text>
-          <Text>{this.props.description}</Text>
+          <View style={styles.imageContainer}>
+            <Image
+              source={{uri: this.props.uri}}
+              style={styles.image}
+            />
+          </View>
+          <View style={{flex: 1}}>
+            <Text style={styles.descriptionContainer}>{this.props.description}</Text>
+          </View>
         </TouchableOpacity>
       </View>
     );
@@ -39,21 +50,26 @@ class ShoeItem extends Component {
 };
 
 const styles = StyleSheet.create({
-  shoeItem: {
-    padding: 20,
-    borderColor: '#e1e1e1',
-    borderWidth: 1,
-    borderRadius: 3
+  shoeItemContainer: {
+    flex: 1,
+    height: 130,
+    width: 130,
+    backgroundColor: 'white',
+    marginRight: 3
   },
-  sizes: {
-    flexDirection: 'row'
+  imageContainer: {
+    flex: 2, 
+    justifyContent: 'center'
   },
-  sizeText: {
-    marginRight: 5
+  image: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'cover'
   },
-  thumbnail: {
-    width: '100%',
-    height: 100
+  descriptionContainer: {
+    flex: 1,
+    textAlign: 'center'
   }
 });
 
