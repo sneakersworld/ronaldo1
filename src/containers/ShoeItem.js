@@ -17,58 +17,72 @@ import {
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
+import { Icon } from 'react-native-elements';
+
 class ShoeItem extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isFavorite: false
+    }
+  }
+
+  handleFavoriteOnPress = () => {
+    this.setState((state) => ({
+      isFavorite: !state.isFavorite
+    }));
   }
 
   render() {
     return (
-      <View style={styles.shoeItemContainer}>
+      <TouchableOpacity
+        onPress={() => {
+          this.props.navigation.navigate('ShoeItemPage', {
+            sku: this.props.sku,
+            description: this.props.description
+          })
+        }}
+        accessibilityRole={'button'}
+        style={{flex: 1}}
+      >
         <TouchableOpacity
-          onPress={() => {
-            this.props.navigation.navigate('ShoeItemPage', {
-              sku: this.props.sku
-            })
-          }}
+          onPress={this.handleFavoriteOnPress}
           accessibilityRole={'button'}
-          style={{flex: 1}}
+          style={{alignSelf: 'flex-end'}}
         >
-          <View style={styles.imageContainer}>
-            <Image
-              source={{uri: this.props.uri}}
-              style={styles.image}
-            />
-          </View>
-          <View style={{flex: 1}}>
-            <Text style={styles.descriptionContainer}>{this.props.description}</Text>
-          </View>
+          <Icon name={this.state.isFavorite ? 'favorite' : 'favorite-border'} size={20} />
         </TouchableOpacity>
-      </View>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            source={{uri: this.props.uri}}
+          />
+        </View>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.description}>{this.props.description}</Text>
+        </View>
+      </TouchableOpacity>
     );
   }
 };
 
 const styles = StyleSheet.create({
-  shoeItemContainer: {
-    flex: 1,
-    height: 130,
-    width: 130,
-    backgroundColor: 'white',
-    marginRight: 3
-  },
   imageContainer: {
-    flex: 2, 
-    justifyContent: 'center'
+    flex: 2,
+    justifyContent: 'center',
   },
   image: {
     flex: 1,
-    width: null,
-    height: null,
-    resizeMode: 'cover'
+    width: undefined,
+    height: undefined,
+    resizeMode: 'contain'
   },
   descriptionContainer: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  description: {
     textAlign: 'center'
   }
 });

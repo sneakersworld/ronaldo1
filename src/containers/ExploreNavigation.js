@@ -19,7 +19,15 @@ const ExploreNavigation = createStackNavigator({
       header: null
     }
   },
-  ShoeItemPage: ShoeItemPage
+  ShoeItemPage: {
+    screen: ShoeItemPage,
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: 'black'
+      }
+    }
+  }
 })
 
 export default ExploreNavigation;

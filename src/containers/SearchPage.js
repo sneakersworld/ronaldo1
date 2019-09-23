@@ -9,10 +9,13 @@
 
 import React, { Component, Fragment } from 'react';
 import {
+  Animated,
   Dimensions,
   Keyboard,
   Platform,
   SafeAreaView,
+  ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TextInput,
@@ -25,6 +28,7 @@ import * as Animatable from 'react-native-animatable';
 
 import Colors from '../Colors';
 import ShoeItem from './ShoeItem';
+import FilterTag from './FilterTag';
 import sample from '../data/shoes';
 
 const numColumns = 2;
@@ -53,10 +57,15 @@ class SearchPage extends Component {
     //   this.keyboardWillHide
     // );
 
-    this.startHeaderHeight = 80
-    if (Platform.OS === 'android') {
-      this.startHeaderHeight = 100 + StatusBar.currentHeight
-    }
+    this.scrollY = new Animated.Value(0);
+    this.startHeaderHeight = 80;
+    this.endHeaderHeight = 30;
+
+    this.animatedHeaderHeight = this.scrollY.interpolate({
+      inputRange: [0, 50],
+      outputRange: [this.startHeaderHeight, this.endHeaderHeight],
+      extrapolate: 'clamp'
+    });
   }
 
   // Android does not use keyboardDidShow
@@ -100,7 +109,7 @@ class SearchPage extends Component {
     return (
       <SafeAreaView style={styles.screenContainer}>
         <View style={styles.container}>
-          <View style={[{height: this.startHeaderHeight}, styles.headerContainer]}>
+          <Animated.View style={[{height: this.animatedHeaderHeight}, styles.headerContainer]}>
             <View style={[{marginTop: Platform.OS === 'android'? '30' : null}, styles.searchContainer]}>
               <Icon name='search' size={20} style={styles.searchIcon}/>
               <TextInput
@@ -109,7 +118,38 @@ class SearchPage extends Component {
                 style={styles.searchTextInput}
               />
             </View>
+          </Animated.View>
+          <View style={styles.filterContainer}>
+            <TouchableOpacity>
+              <FilterTag tag='Sizes' />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <FilterTag tag='Prices' />
+            </TouchableOpacity>
           </View>
+          <Animated.ScrollView
+            scrollEventThrottle={1}
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent: {
+                    contentOffset: {y: this.scrollY}
+                  }
+                }
+              ],
+              {
+                useNativeDriver: true
+              }
+            )}
+          >
+            <View style={{flex: 1, height: 100}}><Text>Sample</Text></View>
+            <View style={{flex: 1, height: 100}}><Text>Sample</Text></View>
+            <View style={{flex: 1, height: 100}}><Text>Sample</Text></View>
+            <View style={{flex: 1, height: 100}}><Text>Sample</Text></View>
+            <View style={{flex: 1, height: 100}}><Text>Sample</Text></View>
+            <View style={{flex: 1, height: 100}}><Text>Sample</Text></View>
+            <View style={{flex: 1, height: 100}}><Text>Sample</Text></View>
+          </Animated.ScrollView>
         </View>
       </SafeAreaView>
     );
@@ -140,7 +180,14 @@ const styles = StyleSheet.create({
   searchTextInput: {
     flex: 1,
     fontWeight: '700',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    marginLeft: 10,
+  },
+  filterContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 20,
+    position: 'relative',
+    top: 10
   }
 });
 

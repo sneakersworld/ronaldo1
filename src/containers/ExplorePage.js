@@ -27,7 +27,7 @@ import { FlatList } from 'react-navigation';
 import Colors from '../Colors';
 import ShoeItem from './ShoeItem';
 import sample from '../data/shoes';
-import featuredSample from '../data/shoes';
+import featuredSample from '../data/sample-shoes';
 
 const numColumns = 2;
 const { height, width } = Dimensions.get('window');
@@ -67,6 +67,20 @@ class ExplorePage extends Component {
 
   _keyExtractor = _ => _.sku.toString();
 
+  renderFeaturedShoes = () => {
+    return featuredSample.map(item =>
+      <View style={styles.featuredShoeItemContainer}>
+        <ShoeItem
+          key={item.sku}
+          brand={item.brand}
+          description={item.description}
+          sku={item.sku}
+          uri={item.img}
+        />
+      </View>
+    )
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.screenContainer}>
@@ -74,7 +88,10 @@ class ExplorePage extends Component {
           <ScrollView
             scrollEventThrottle={16}
           >
-            <View style={{flex: 1}}>
+            <View style={styles.headerContainer}>
+              <Text style={{color: 'white', fontWeight: '700'}}>HOME</Text>
+            </View>
+            <View style={{flex: 1, marginTop: 10}}>
               <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
                 <Text style={styles.featuredText}>Featured</Text>
                 <TouchableOpacity>
@@ -82,18 +99,8 @@ class ExplorePage extends Component {
                 </TouchableOpacity>
               </View>
               <View>
-                <ScrollView
-                  horizontal={true}
-                >
-                  {
-                    featuredSample.map((item) => 
-                      <ShoeItem
-                        key={item.sku}
-                        description={item.description}
-                        uri={item.img}
-                      />
-                    )
-                  }
+                <ScrollView horizontal={true}>
+                  {this.renderFeaturedShoes()}
                 </ScrollView>
               </View>
             </View>
@@ -121,6 +128,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
+  headerContainer: {
+    flex: 1,
+    height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black'
+  },
   featuredText: {
     fontSize: 18,
     fontWeight: '500',
@@ -131,9 +145,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     paddingHorizontal: 20,
     paddingVertical: 10
-  },
-  flatListContainer: {
-    // marginBottom: 82
   },
   shoeItemContainer: {
     alignItems: 'center',
@@ -146,7 +157,15 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     padding: 10,
     height: Dimensions.get('window').width / numColumns
-  }
+  },
+  featuredShoeItemContainer: {
+    flex: 1,
+    height: 130,
+    width: 130,
+    backgroundColor: 'white',
+    padding: 10,
+    marginRight: 3,
+  },
 });
 
 export default ExplorePage;
