@@ -34,13 +34,14 @@ class ExplorePage extends Component {
 
   }
 
-  updateSearch = (search) => this.setState({search});
+  updateSearch = (search) => this.setState({search: search});
 
 
   renderHeader = () => {
     return (
       <Fragment>
-        <SearchBar 
+        <SearchBar
+          round
           placeholder="Search" 
           onChangeText={this.updateSearch} 
           value={this.state.search} 
@@ -85,6 +86,7 @@ class ExplorePage extends Component {
           <FlatList 
             style={styles.list}
             data={sampleData}
+            extraData={this.state}
             ListHeaderComponent={this.renderHeader}
             ListHeaderComponentStyle={styles.header}
             renderItem={this._renderItem} 
